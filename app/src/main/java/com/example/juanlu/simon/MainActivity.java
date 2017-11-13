@@ -9,18 +9,19 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button green, red, yellow, blue;
-    final private MediaPlayer greenSound = MediaPlayer.create(this, R.raw.green);
-    final private MediaPlayer redSound = MediaPlayer.create(this, R.raw.red);
-    final private MediaPlayer yellowSound = MediaPlayer.create(this, R.raw.yellow);
-    final private MediaPlayer blueSound = MediaPlayer.create(this, R.raw.blue);
+    private MediaPlayer greenSound;
+    private MediaPlayer redSound;
+    private MediaPlayer yellowSound;
+    private MediaPlayer blueSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        conectWidgets();
         connectEventsToWidgets();
+
     }
 
     private void connectEventsToWidgets() {
@@ -36,12 +37,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         red = findViewById(R.id.red);
         yellow = findViewById(R.id.yellow);
         blue = findViewById(R.id.blue);
+        greenSound = MediaPlayer.create(this, R.raw.green);
+        redSound = MediaPlayer.create(this, R.raw.red);
+        yellowSound = MediaPlayer.create(this, R.raw.yellow);
+        blueSound = MediaPlayer.create(this, R.raw.blue);
     }
 
     @Override
     public void onClick(View v) {
-        Button button = (Button) v;
-        switch (button.getId()) {
+        switch (v.getId()) {
             case R.id.green:
                 greenSound.start();
                 break;
@@ -54,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.blue:
                 blueSound.start();
                 break;
+
+                default:
+                    //error
         }
     }
 }
